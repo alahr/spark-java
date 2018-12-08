@@ -7,12 +7,12 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
-public class ProcessDate {
+public class JSONParse {
     public static void main(String[] args){
-        SparkConf sc = new SparkConf().setAppName("process-date").setMaster("local");
+        SparkConf sc = new SparkConf().setAppName("json-parse").setMaster("local");
         JavaSparkContext sparkContext = new JavaSparkContext(sc);
 
-        JavaRDD<String> lines = sparkContext.textFile("shopping.txt");
+        JavaRDD<String> lines = sparkContext.textFile("json.txt");
 
         JavaPairRDD<String, Integer> ones = lines.mapToPair( line -> {
             JSONObject obj = JSONObject.parseObject(line);
