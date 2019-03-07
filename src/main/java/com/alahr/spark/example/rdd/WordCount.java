@@ -1,4 +1,4 @@
-package com.alahr.spark.example;
+package com.alahr.spark.example.rdd;
 
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -15,11 +15,11 @@ public class WordCount {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> lines = sc.textFile("english.txt");
-        JavaRDD<String> words = lines.flatMap( line -> Arrays.asList(line.split(" ")).iterator());
-        JavaPairRDD<String, Integer> ones = words.mapToPair( word -> new Tuple2<>(word, 1));
-        JavaPairRDD<String, Integer> wordCounts = ones.reduceByKey((a,b) -> a+b);
+        JavaRDD<String> words = lines.flatMap(line -> Arrays.asList(line.split(" ")).iterator());
+        JavaPairRDD<String, Integer> ones = words.mapToPair(word -> new Tuple2<>(word, 1));
+        JavaPairRDD<String, Integer> wordCounts = ones.reduceByKey((a, b) -> a + b);
 
-        wordCounts.collect().forEach(t -> System.out.println(t._1+": "+t._2));
+        wordCounts.sortByKey().collect().forEach(t -> System.out.println(t._1() + ": " + t._2()));
 
         sc.close();
     }
