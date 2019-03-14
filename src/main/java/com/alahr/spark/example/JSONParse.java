@@ -1,4 +1,4 @@
-package com.alahr.spark.example.rdd;
+package com.alahr.spark.example;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.spark.SparkConf;
