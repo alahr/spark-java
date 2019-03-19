@@ -1,10 +1,11 @@
-package com.alahr.spark.example;
+package com.alahr.spark.example.rdd;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import scala.Tuple2;
 
 public class JSONParse {
@@ -17,7 +18,7 @@ public class JSONParse {
         JavaPairRDD<String, Integer> ones = lines.mapToPair(line -> {
             JSONObject obj = JSONObject.parseObject(line);
             String date = obj.getString("date").substring(0, 16);
-            return new Tuple2<String, Integer>(date, 1);
+            return new Tuple2<>(date, 1);
         });
 
         JavaPairRDD<String, Integer> counts = ones.reduceByKey((a, b) -> a + b);

@@ -1,4 +1,4 @@
-package com.alahr.spark.example;
+package com.alahr.spark.example.rdd;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
