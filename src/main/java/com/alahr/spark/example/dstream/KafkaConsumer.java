@@ -25,7 +25,7 @@ public class KafkaConsumer {
         String groupId = "spark_group";
         String topics = "json_topic";
         // Create context with a 2 seconds batch interval
-        SparkConf sparkConf = new SparkConf().setAppName("JavaDirectKafkaWordCount").setMaster("local");
+        SparkConf sparkConf = new SparkConf().setAppName("JavaDirectKafkaWordCount").setMaster("local[2]");
         JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.seconds(2));
         Set<String> topicsSet = new HashSet<>(Arrays.asList(topics.split(",")));
         Map<String, Object> kafkaParams = new HashMap<>();

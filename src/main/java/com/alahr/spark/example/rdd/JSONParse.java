@@ -5,12 +5,11 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import scala.Tuple2;
 
 public class JSONParse {
     public static void main(String[] args) {
-        SparkConf sc = new SparkConf().setAppName("json-parse").setMaster("local");
+        SparkConf sc = new SparkConf().setAppName("json-parse").setMaster("local[2]");
         JavaSparkContext sparkContext = new JavaSparkContext(sc);
 
         JavaRDD<String> lines = sparkContext.textFile("json.txt");
