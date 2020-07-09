@@ -32,8 +32,7 @@ public class DwsMain {
         Dataset<Person> dataset = sparkSession.createDataset(personList, Encoders.bean(Person.class));
 
         dataset.javaRDD()
-                .mapToPair(person -> new Tuple2<>(person.getCity() + "_" + person.getName(), person))
-                .groupByKey()
+                .groupBy( person -> person.getCity()+"_"+person.getName())
                 .foreach(t -> {
                     String key = t._1;
                     Iterator<Person> iterator = t._2.iterator();
